@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./Pages/Home";
 import NewPost from "./Pages/NewPost";
@@ -42,8 +42,13 @@ function Navbar() {
             />
 
             <div className="home-newPost">
-                <p className="home-page">Home</p>
-                <p className="new-post-page">Create New Post</p>
+                <Link to={"/"}>
+                    <p className="home-page">Home</p>
+                </Link>
+
+                <Link to={"/newPost"}>
+                    <p className="new-post-page">Create New Post</p>
+                </Link>
             </div>
         </div>
     );

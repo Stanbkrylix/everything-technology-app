@@ -19,17 +19,13 @@ body {
     padding: 0;
 }
 
+/* Navbar */
 .navbar-container {
     /* display: flex; */
     /* padding: 0; */
     /* width: 1000px; */
     background-color: #0c2d48;
     width: 100%;
-}
-
-.content-container {
-    width: 1000px;
-    margin: 0 auto;
 }
 
 .navbar {
@@ -43,4 +39,82 @@ body {
 .home-newPost {
     display: flex;
     gap: 1rem;
+}
+
+/* Content */
+.content-container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+/* Home Container */
+.filter-btns {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.filter-btns button {
+    background-color: #0c2d48;
+    border: none;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+/* New post section */
+.new-post-container {
+    color: #0c2d48;
+}
+.post-section {
+    text-align: left;
+    /* color: #0c2d48; */
+}
+.post {
+    border: 1px solid #0c2d48;
+    border-radius: 0.4rem;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem;
+    cursor: pointer;
+}
+
+.post * {
+    /* select all child elements*/
+    margin: 0;
+    padding: 0.2rem;
+}
+.new-post-card {
+    border: 1px solid #0c2d48;
+    border-radius: 0.4rem;
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem;
+    gap: 0.5rem;
+}
+
+.new-post-card * {
+    border: none;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    background-color: #0c2d48;
+    color: white;
+}
+
+.new-post-card *:focus {
+    outline: none;
+}
+.create-post-btn {
+    align-self: self-start;
+    cursor: pointer;
+    /* background-color: #0c2d48; */
+}
+.post-p {
+    background-color: rgb(202, 212, 216);
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0;
+    color: #0c2d48;
 }
