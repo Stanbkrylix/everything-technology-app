@@ -1,6 +1,46 @@
 #root {
-    max-width: 1280px;
+    /* width: 1280px; */
     margin: 0 auto;
-    padding: 2rem;
+    /* padding: 0; */
     text-align: center;
+}
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.main-container {
+    height: 100vh;
+    /* width: 1000px; */
+    margin: 0 auto;
+    padding: 0;
+}
+
+.navbar-container {
+    /* display: flex; */
+    /* padding: 0; */
+    /* width: 1000px; */
+    background-color: #0c2d48;
+    width: 100%;
+}
+
+.content-container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    width: 1000px;
+    margin: 0 auto;
+}
+.home-newPost {
+    display: flex;
+    gap: 1rem;
 }
