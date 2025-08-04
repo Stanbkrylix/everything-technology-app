@@ -1,7 +1,32 @@
-function NewPost() {
+import { useState } from "react";
+
+function NewPost({ dataArray, addDataTo }) {
+    const [data, setData] = useState({
+        title: "",
+        content: "",
+        imageUrl: "",
+    });
+
     function handleSubmit(e) {
         e.preventDefault();
+        const dateOfCreation = Date.now();
+
+        const newData = {
+            ...data,
+            id: crypto.randomUUID(),
+            date: dateOfCreation,
+            likes: 0,
+        };
+
+        addDataTo(newData);
     }
+
+    function handleOnChange(e) {
+        const { name, value } = e.target;
+
+        setData((prev) => ({ ...prev, [name]: value }));
+    }
+
     return (
         <div className="new-post-container">
             <h1>Create New Post</h1>
@@ -10,7 +35,9 @@ function NewPost() {
                 <p className="post-p">New Post</p>
                 <input
                     type="text"
-                    name=""
+                    name="title"
+                    value={data.title}
+                    onChange={handleOnChange}
                     id=""
                     className="title"
                     placeholder="Title"
@@ -18,7 +45,9 @@ function NewPost() {
                 <textarea
                     type="text"
                     placeholder="Content (Optional)"
-                    name=""
+                    name="content"
+                    value={data.content}
+                    onChange={handleOnChange}
                     rows={10}
                     cols={50}
                     style={{ resize: "none" }}
@@ -26,6 +55,9 @@ function NewPost() {
                 />
                 <input
                     type="text"
+                    name="imageUrl"
+                    value={data.imageUrl}
+                    onChange={handleOnChange}
                     placeholder="image url"
                     className="image-url"
                 />
