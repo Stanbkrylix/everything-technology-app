@@ -118,3 +118,18 @@ body {
     margin: 0;
     color: #0c2d48;
 }
+
+.post-link {
+    text-decoration: none;
+    color: #0c2d48;
+}
+
+/* Post Details */
+
+.post-detail {
+    width: 50%;
+    margin: 0 auto;
+}
+.post-detail-image-url {
+    width: 100%;
+}

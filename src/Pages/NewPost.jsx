@@ -21,6 +21,7 @@ function NewPost({ dataArray, addDataTo }) {
             id: crypto.randomUUID(),
             date: dateOfCreation,
             likes: 0,
+            comments: [],
         };
 
         addDataTo(newData);

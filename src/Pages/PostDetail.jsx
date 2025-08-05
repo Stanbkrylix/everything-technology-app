@@ -31,7 +31,16 @@ function PostDetail({ getData }) {
             <h1>Post Detail</h1>
             <div className="post-detail-card">
                 <p className="duration-since-posted">{getTime()}</p>
-                <h2 className="post-detail-title">{}</h2>
+                <h2 className="post-detail-title">{dataToUse.title}</h2>
+                <p className="post-detail-content">{dataToUse.content}</p>
+                <img
+                    src={dataToUse.imageUrl}
+                    alt=""
+                    className="post-detail-image-url"
+                />
+                <button className="post-details-likes">
+                    👍{dataToUse.likes} likes
+                </button>
             </div>
         </div>
     );
