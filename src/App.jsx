@@ -40,6 +40,7 @@ function App() {
 
     function deletePost(data) {
         console.log(data);
+        setDataArray((prev) => prev.filter((item) => item.id !== data.id));
     }
 
     return (
@@ -82,6 +83,7 @@ function App() {
                                 getData={getData}
                                 updateLikes={updateLikes}
                                 addComments={addComments}
+                                deletePost={deletePost}
                             />
                         }
                     />

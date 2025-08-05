@@ -9,6 +9,13 @@ function PostDetail({ getData, updateLikes, addComments, deletePost }) {
     if (data.length === 0) return;
     const dataToUse = data.find((item) => item.id === id);
 
+    if (!dataToUse)
+        return (
+            <div>
+                <h2>Post have been deleted</h2>
+            </div>
+        );
+
     const currentDate = Date.now();
     const duration = currentDate - dataToUse.date;
     function getTime() {
@@ -52,7 +59,10 @@ function PostDetail({ getData, updateLikes, addComments, deletePost }) {
 
                     <div className="edit-update">
                         <button className="edit-btn">Edit</button>
-                        <button className="edit-btn" onClick={() => ""}>
+                        <button
+                            className="edit-btn"
+                            onClick={() => deletePost(dataToUse)}
+                        >
                             Delete
                         </button>
                     </div>
