@@ -127,9 +127,63 @@ body {
 /* Post Details */
 
 .post-detail {
-    width: 50%;
-    margin: 0 auto;
-}
-.post-detail-image-url {
     width: 100%;
+    margin-top: 1rem;
+    /* margin: 0 auto; */
+    text-align: left;
+    border: 1px solid #0c2d48;
+    padding: 0.4rem;
+}
+.post-detail-card {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+}
+
+.post-detail-card * {
+    margin: 0;
+}
+
+.post-detail-image-url {
+    width: 30%;
+}
+
+.post-details-likes-btn {
+    background-color: #0c2d48;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.4rem;
+    cursor: pointer;
+}
+
+/* Likes */
+.like-update-edit-div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.edit-update {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.edit-update button {
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    background-color: #0c2d48;
+}
+.comment-sections {
+    width: 85%;
+    background-color: #2e8bc0;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+}
+.comment-input {
+    width: 85%;
+}
+.comment-btn {
+    cursor: pointer;
 }

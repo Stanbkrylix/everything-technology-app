@@ -14,9 +14,6 @@ function App() {
 
     function addDataTo(newData) {
         setDataArray((prev) => [...prev, newData]);
-
-        // console.log(data);
-        console.log(dataArray);
     }
 
     function getData() {
@@ -26,11 +23,23 @@ function App() {
     function updateLikes(data) {
         setDataArray((prev) =>
             prev.map((item) =>
+                item.id === data.id ? { ...item, likes: data.likes + 1 } : item
+            )
+        );
+    }
+
+    function addComments(comment, data) {
+        setDataArray((prev) =>
+            prev.map((item) =>
                 item.id === data.id
-                    ? { ...item, likes: (data.likes += 1) }
+                    ? { ...item, comments: [...(item.comments || []), comment] }
                     : item
             )
         );
+    }
+
+    function deletePost(data) {
+        console.log(data);
     }
 
     return (
@@ -72,6 +81,7 @@ function App() {
                             <PostDetail
                                 getData={getData}
                                 updateLikes={updateLikes}
+                                addComments={addComments}
                             />
                         }
                     />
