@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-function PostDetail({ getData, updateLikes, addComments, deletePost }) {
+function PostDetail({
+    getData,
+    updateLikes,
+    addComments,
+    deletePost,
+    updatePost,
+}) {
     const { id } = useParams();
     const data = getData();
     const [comment, setComment] = useState("");
+    const [editMode, setEditMode] = useState(false);
 
     if (data.length === 0) return;
     const dataToUse = data.find((item) => item.id === id);
@@ -31,13 +38,21 @@ function PostDetail({ getData, updateLikes, addComments, deletePost }) {
         return `${days} day${days !== 1 ? "s" : ""} ago`;
     }
 
+    function cancelUpdate() {
+        setEditMode(!editMode);
+    }
+
     console.log(dataToUse);
 
     function handleChange(e) {
         setComment(e.target.value);
     }
 
-    return (
+    function changeEditMode() {
+        setEditMode(!editMode);
+    }
+
+    return !editMode ? (
         <div className="post-detail">
             <h1>Post Detail</h1>
             <div className="post-detail-card">
@@ -58,7 +73,12 @@ function PostDetail({ getData, updateLikes, addComments, deletePost }) {
                     </button>
 
                     <div className="edit-update">
-                        <button className="edit-btn">Edit</button>
+                        <button
+                            className="edit-btn"
+                            onClick={() => setEditMode(!editMode)}
+                        >
+                            Edit
+                        </button>
                         <button
                             className="edit-btn"
                             onClick={() => deletePost(dataToUse)}
@@ -86,6 +106,7 @@ function PostDetail({ getData, updateLikes, addComments, deletePost }) {
                         <button
                             className="comment-btn"
                             onClick={() => {
+                                if (!comment) return;
                                 addComments(comment, dataToUse);
                                 setComment("");
                             }}
@@ -95,6 +116,81 @@ function PostDetail({ getData, updateLikes, addComments, deletePost }) {
                     </div>
                 </div>
             </div>
+        </div>
+    ) : (
+        <UpdateCard
+            dataToUse={dataToUse}
+            cancelUpdate={cancelUpdate}
+            updatePost={updatePost}
+            changeEditMode={changeEditMode}
+        />
+    );
+}
+
+function UpdateCard({ dataToUse, cancelUpdate, updatePost, changeEditMode }) {
+    const [updateValue, setUpdateValue] = useState({
+        title: dataToUse.title,
+        content: dataToUse.content,
+        imageUrl: dataToUse.imageUrl,
+    });
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        updatePost(dataToUse.id, updateValue);
+        changeEditMode();
+    }
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setUpdateValue((prev) => ({ ...prev, [name]: value }));
+    }
+    return (
+        <div className="new-post-container">
+            <h1>Update Post</h1>
+
+            <form className="new-post-card" onSubmit={handleSubmit}>
+                <p className="post-p">Post to update</p>
+                <input
+                    type="text"
+                    name="title"
+                    value={updateValue.title}
+                    onChange={handleChange}
+                    id=""
+                    className="title"
+                    placeholder="Title"
+                />
+                <textarea
+                    type="text"
+                    placeholder="Content (Optional)"
+                    name="content"
+                    value={updateValue.content}
+                    onChange={handleChange}
+                    rows={10}
+                    cols={50}
+                    style={{ resize: "none" }}
+                    className="content"
+                />
+                <input
+                    type="text"
+                    name="imageUrl"
+                    value={updateValue.imageUrl}
+                    onChange={handleChange}
+                    placeholder="image url"
+                    className="image-url"
+                />
+                <div className="updated-btns">
+                    <input
+                        type="submit"
+                        name=""
+                        value="Update Post"
+                        id=""
+                        className="update-post-btn"
+                    />
+
+                    <button className="cancel-btn" onClick={cancelUpdate}>
+                        Cancel
+                    </button>
+                </div>
+            </form>
         </div>
     );
 }

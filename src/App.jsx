@@ -29,6 +29,8 @@ function App() {
     }
 
     function addComments(comment, data) {
+        // if (!comment) return;
+
         setDataArray((prev) =>
             prev.map((item) =>
                 item.id === data.id
@@ -41,6 +43,15 @@ function App() {
     function deletePost(data) {
         console.log(data);
         setDataArray((prev) => prev.filter((item) => item.id !== data.id));
+    }
+
+    function updatePost(id, updateValues) {
+        console.log(id, updateValues);
+        setDataArray((prev) =>
+            prev.map((item) =>
+                item.id === id ? { ...item, ...updateValues } : item
+            )
+        );
     }
 
     return (
@@ -84,6 +95,7 @@ function App() {
                                 updateLikes={updateLikes}
                                 addComments={addComments}
                                 deletePost={deletePost}
+                                updatePost={updatePost}
                             />
                         }
                     />

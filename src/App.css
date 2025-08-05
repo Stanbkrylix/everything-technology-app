@@ -187,3 +187,14 @@ body {
 .comment-btn {
     cursor: pointer;
 }
+
+/* updated post card */
+.updated-btns {
+    background-color: rgb(202, 212, 216);
+    align-self: flex-start;
+    display: flex;
+    gap: 0.5rem;
+}
+.updated-btns * {
+    cursor: pointer;
+}
