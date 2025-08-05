@@ -23,6 +23,16 @@ function App() {
         return dataArray;
     }
 
+    function updateLikes(data) {
+        setDataArray((prev) =>
+            prev.map((item) =>
+                item.id === data.id
+                    ? { ...item, likes: (data.likes += 1) }
+                    : item
+            )
+        );
+    }
+
     return (
         <BrowserRouter>
             <Routes>
@@ -58,7 +68,12 @@ function App() {
 
                     <Route
                         path="/post/:id"
-                        element={<PostDetail getData={getData} />}
+                        element={
+                            <PostDetail
+                                getData={getData}
+                                updateLikes={updateLikes}
+                            />
+                        }
                     />
                 </Route>
             </Routes>

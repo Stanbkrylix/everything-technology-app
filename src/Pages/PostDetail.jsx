@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-function PostDetail({ getData }) {
+function PostDetail({ getData, updateLikes }) {
     const { id } = useParams();
     const data = getData();
 
@@ -38,7 +38,10 @@ function PostDetail({ getData }) {
                     alt=""
                     className="post-detail-image-url"
                 />
-                <button className="post-details-likes">
+                <button
+                    className="post-details-likes"
+                    onClick={() => updateLikes(dataToUse)}
+                >
                     👍{dataToUse.likes} likes
                 </button>
             </div>
