@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./Pages/Home";
 import NewPost from "./Pages/NewPost";
+import PostDetail from "./Pages/PostDetail";
 import "./App.css";
 import { useState } from "react";
 
@@ -16,6 +17,10 @@ function App() {
 
         // console.log(data);
         console.log(dataArray);
+    }
+
+    function getData() {
+        return dataArray;
     }
 
     return (
@@ -33,13 +38,15 @@ function App() {
                         />
                     }
                 >
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home getData={getData} />} />
+
                     <Route
                         path="/newPost"
                         element={
                             <NewPost data={dataArray} addDataTo={addDataTo} />
                         }
                     />
+
                     <Route
                         path="*"
                         element={
@@ -47,6 +54,11 @@ function App() {
                                 <h1>Not Found</h1>
                             </div>
                         }
+                    />
+
+                    <Route
+                        path="/post/:id"
+                        element={<PostDetail getData={getData} />}
                     />
                 </Route>
             </Routes>

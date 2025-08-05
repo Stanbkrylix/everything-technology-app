@@ -11,6 +11,11 @@ function NewPost({ dataArray, addDataTo }) {
         e.preventDefault();
         const dateOfCreation = Date.now();
 
+        if (!data.title || !data.imageUrl) {
+            alert("Please fill out all Fields");
+            return;
+        }
+
         const newData = {
             ...data,
             id: crypto.randomUUID(),
@@ -19,6 +24,7 @@ function NewPost({ dataArray, addDataTo }) {
         };
 
         addDataTo(newData);
+        setData({ title: "", content: "", imageUrl: "" });
     }
 
     function handleOnChange(e) {
