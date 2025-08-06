@@ -11,6 +11,7 @@ import { useState } from "react";
 
 function App() {
     const [dataArray, setDataArray] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
     function addDataTo(newData) {
         setDataArray((prev) => [...prev, newData]);
@@ -62,14 +63,20 @@ function App() {
                         <Layout
                             Navbar={
                                 <Navbar
-                                    data={dataArray}
-                                    setData={setDataArray}
+                                    dataArray={dataArray}
+                                    setDataArray={setDataArray}
+                                    setSearchText={setSearchText}
                                 />
                             }
                         />
                     }
                 >
-                    <Route path="/" element={<Home getData={getData} />} />
+                    <Route
+                        path="/"
+                        element={
+                            <Home getData={getData} searchText={searchText} />
+                        }
+                    />
 
                     <Route
                         path="/newPost"
@@ -105,7 +112,11 @@ function App() {
     );
 }
 
-function Navbar() {
+function Navbar({ dataArray, setDataArray, setSearchText }) {
+    function handleChange(e) {
+        setSearchText(e.target.value);
+    }
+
     return (
         <div className="navbar">
             <h2 className="logo-name">Every⚙Technology</h2>
@@ -113,7 +124,8 @@ function Navbar() {
             <input
                 placeholder="Search"
                 type="text"
-                name="search bar"
+                name="search-bar"
+                onChange={handleChange}
                 id=""
                 className="search-bar"
             />

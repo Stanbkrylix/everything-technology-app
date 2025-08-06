@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 
-function Home({ getData }) {
+function Home({ getData, searchText }) {
     const data = getData();
+    const filteredData = data.filter((item) =>
+        item.title.toLowerCase().includes(searchText.toLowerCase())
+    );
 
     return (
         <div className="home-container">
@@ -16,7 +19,11 @@ function Home({ getData }) {
                 <button className="popular-btn">Most Popular</button>
             </div>
             <div className="post-section">
-                {data.map((item) => (
+                {/* {data.map((item) => (
+                    <Post key={item.id} item={item} />
+                ))} */}
+
+                {filteredData.map((item) => (
                     <Post key={item.id} item={item} />
                 ))}
             </div>
