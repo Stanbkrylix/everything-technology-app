@@ -67,21 +67,38 @@ function App() {
         }
     }
 
-    function addComments(comment, data) {
-        // if (!comment) return;
+    async function addComments(comment, post) {
+        const updatedComments = [...(post.comments || []), comment];
 
-        setDataArray((prev) =>
-            prev.map((item) =>
-                item.id === data.id
-                    ? { ...item, comments: [...(item.comments || []), comment] }
-                    : item
-            )
-        );
+        const { error } = await supabase
+            .from("posts")
+            .update({ comments: updatedComments })
+            .eq("id", post.id);
+
+        if (!error) {
+            setDataArray((prev) =>
+                prev.map((item) =>
+                    item.id === post.id
+                        ? { ...item, comments: updatedComments }
+                        : item
+                )
+            );
+        } else {
+            console.error("Comment error:", error);
+        }
     }
 
-    function deletePost(data) {
-        console.log(data);
-        setDataArray((prev) => prev.filter((item) => item.id !== data.id));
+    async function deletePost(post) {
+        const { error } = await supabase
+            .from("posts")
+            .delete()
+            .eq("id", post.id);
+
+        if (!error) {
+            setDataArray((prev) => prev.filter((item) => item.id !== post.id));
+        } else {
+            console.error("Delete error:", error);
+        }
     }
 
     function updatePost(id, updateValues) {
