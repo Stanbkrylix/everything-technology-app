@@ -42,10 +42,6 @@ function Home({ getData, searchText }) {
                 </button>
             </div>
             <div className="post-section">
-                {/* {filteredData.map((item) => (
-                    <Post key={item.id} item={item} />
-                ))} */}
-
                 {sortedData.map((item) => (
                     <Post key={item.id} item={item} />
                 ))}

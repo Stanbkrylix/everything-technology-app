@@ -5,6 +5,7 @@ import NewPost from "./Pages/NewPost";
 import PostDetail from "./Pages/PostDetail";
 import "./App.css";
 import { useState } from "react";
+import { supabase } from "./supabaseClient";
 
 // Color theme
 // #145DA0 , #0C2D48 , #2E8BC0 , #B1D4E0
@@ -16,6 +17,23 @@ function App() {
     function addDataTo(newData) {
         setDataArray((prev) => [...prev, newData]);
     }
+
+    useEffect(() => {
+        async function fetchData() {
+            const { data, error } = await supabase
+                .from("posts")
+                .select("*")
+                .order("date_created", { ascending: false });
+
+            if (error) {
+                console.error("Fetch error:", error);
+            } else {
+                setDataArray(data);
+            }
+        }
+
+        fetchData();
+    }, []);
 
     function getData() {
         return dataArray;
