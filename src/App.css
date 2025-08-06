@@ -198,3 +198,8 @@ body {
 .updated-btns * {
     cursor: pointer;
 }
+
+button.active {
+    background-color: #145da0;
+    font-weight: bold;
+}

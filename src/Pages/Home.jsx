@@ -1,29 +1,52 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Home({ getData, searchText }) {
     const data = getData();
+    const [sortBy, setSortBy] = useState("newest");
+
+    // filter by search
     const filteredData = data.filter((item) =>
         item.title.toLowerCase().includes(searchText.toLowerCase())
     );
+
+    const sortedData = [...filteredData].sort((a, b) => {
+        if (sortBy === "newest") {
+            return b.date - a.date; // Newest first
+        } else if (sortBy === "popular") {
+            return b.likes - a.likes; // Most likes first
+        } else {
+            return 0;
+        }
+    });
 
     return (
         <div className="home-container">
             <div className="filter-btns">
                 <p>Filter by: </p>
                 <button
-                    className="newest-btn"
-                    onClick={() => console.log(data)}
+                    className={`newest-btn ${
+                        sortBy === "newest" ? "active" : ""
+                    }`}
+                    onClick={() => setSortBy("newest")}
                 >
                     Newest
                 </button>
-                <button className="popular-btn">Most Popular</button>
+                <button
+                    className={`popular-btn ${
+                        sortBy === "popular" ? "active" : ""
+                    }`}
+                    onClick={() => setSortBy("popular")}
+                >
+                    Most Popular
+                </button>
             </div>
             <div className="post-section">
-                {/* {data.map((item) => (
+                {/* {filteredData.map((item) => (
                     <Post key={item.id} item={item} />
                 ))} */}
 
-                {filteredData.map((item) => (
+                {sortedData.map((item) => (
                     <Post key={item.id} item={item} />
                 ))}
             </div>
