@@ -4,14 +4,14 @@ function NewPost({ dataArray, addDataTo }) {
     const [data, setData] = useState({
         title: "",
         content: "",
-        imageUrl: "",
+        image_url: "",
     });
 
     function handleSubmit(e) {
         e.preventDefault();
         const dateOfCreation = Date.now();
 
-        if (!data.title || !data.imageUrl) {
+        if (!data.title || !data.image_url) {
             alert("Please fill out all Fields");
             return;
         }
@@ -19,13 +19,13 @@ function NewPost({ dataArray, addDataTo }) {
         const newData = {
             ...data,
             id: crypto.randomUUID(),
-            date: dateOfCreation,
+            date_created: dateOfCreation,
             likes: 0,
             comments: [],
         };
 
         addDataTo(newData);
-        setData({ title: "", content: "", imageUrl: "" });
+        setData({ title: "", content: "", image_url: "" });
     }
 
     function handleOnChange(e) {
@@ -62,8 +62,8 @@ function NewPost({ dataArray, addDataTo }) {
                 />
                 <input
                     type="text"
-                    name="imageUrl"
-                    value={data.imageUrl}
+                    name="image_url"
+                    value={data.image_url}
                     onChange={handleOnChange}
                     placeholder="image url"
                     className="image-url"

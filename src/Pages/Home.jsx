@@ -12,7 +12,7 @@ function Home({ getData, searchText }) {
 
     const sortedData = [...filteredData].sort((a, b) => {
         if (sortBy === "newest") {
-            return b.date - a.date; // Newest first
+            return b.date_created - a.date_created; // Newest first
         } else if (sortBy === "popular") {
             return b.likes - a.likes; // Most likes first
         } else {
@@ -52,7 +52,7 @@ function Home({ getData, searchText }) {
 
 function Post({ item }) {
     const currentDate = Date.now();
-    const duration = currentDate - item.date;
+    const duration = currentDate - item.date_created;
 
     function getTime() {
         const seconds = Math.floor(duration / 1000);

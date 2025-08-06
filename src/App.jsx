@@ -4,7 +4,7 @@ import Home from "./Pages/Home";
 import NewPost from "./Pages/NewPost";
 import PostDetail from "./Pages/PostDetail";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 
 // Color theme
@@ -13,10 +13,6 @@ import { supabase } from "./supabaseClient";
 function App() {
     const [dataArray, setDataArray] = useState([]);
     const [searchText, setSearchText] = useState("");
-
-    function addDataTo(newData) {
-        setDataArray((prev) => [...prev, newData]);
-    }
 
     useEffect(() => {
         async function fetchData() {
@@ -39,12 +35,36 @@ function App() {
         return dataArray;
     }
 
-    function updateLikes(data) {
-        setDataArray((prev) =>
-            prev.map((item) =>
-                item.id === data.id ? { ...item, likes: data.likes + 1 } : item
-            )
-        );
+    async function addDataTo(newData) {
+        const { data, error } = await supabase.from("posts").insert([newData]);
+
+        if (error) {
+            console.error("Insert error:", error);
+        } else {
+            // Optionally, fetch again or add manually
+            setDataArray((prev) => [...prev, newData]);
+        }
+    }
+
+    async function updateLikes(post) {
+        const updatedLikes = post.likes + 1;
+
+        const { error } = await supabase
+            .from("posts")
+            .update({ likes: updatedLikes })
+            .eq("id", post.id);
+
+        if (!error) {
+            setDataArray((prev) =>
+                prev.map((item) =>
+                    item.id === post.id
+                        ? { ...item, likes: updatedLikes }
+                        : item
+                )
+            );
+        } else {
+            console.error("Like update error:", error);
+        }
     }
 
     function addComments(comment, data) {

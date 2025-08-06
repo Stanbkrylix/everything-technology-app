@@ -24,7 +24,7 @@ function PostDetail({
         );
 
     const currentDate = Date.now();
-    const duration = currentDate - dataToUse.date;
+    const duration = currentDate - dataToUse.date_created;
     function getTime() {
         const seconds = Math.floor(duration / 1000);
         const minutes = Math.floor(duration / (1000 * 60));
@@ -60,7 +60,7 @@ function PostDetail({
                 <h2 className="post-detail-title">{dataToUse.title}</h2>
                 <p className="post-detail-content">{dataToUse.content}</p>
                 <img
-                    src={dataToUse.imageUrl}
+                    src={dataToUse.image_url}
                     alt=""
                     className="post-detail-image-url"
                 />
@@ -131,7 +131,7 @@ function UpdateCard({ dataToUse, cancelUpdate, updatePost, changeEditMode }) {
     const [updateValue, setUpdateValue] = useState({
         title: dataToUse.title,
         content: dataToUse.content,
-        imageUrl: dataToUse.imageUrl,
+        image_url: dataToUse.image_url,
     });
 
     function handleSubmit(e) {
@@ -171,8 +171,8 @@ function UpdateCard({ dataToUse, cancelUpdate, updatePost, changeEditMode }) {
                 />
                 <input
                     type="text"
-                    name="imageUrl"
-                    value={updateValue.imageUrl}
+                    name="image_url"
+                    value={updateValue.image_url}
                     onChange={handleChange}
                     placeholder="image url"
                     className="image-url"
