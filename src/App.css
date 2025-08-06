@@ -64,6 +64,7 @@ body {
 /* New post section */
 .new-post-container {
     color: #0c2d48;
+    /* border-radius: 0.4rem; */
 }
 .post-section {
     text-align: left;
@@ -132,6 +133,7 @@ body {
     /* margin: 0 auto; */
     text-align: left;
     border: 1px solid #0c2d48;
+    border-radius: 0.4rem;
     padding: 0.4rem;
 }
 .post-detail-card {
@@ -183,9 +185,22 @@ body {
 }
 .comment-input {
     width: 85%;
+    padding: 0.2rem;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #0c2d48;
+    margin: 0 0.2rem 0 0;
+}
+
+.comment-input:focus {
+    outline: none;
 }
 .comment-btn {
     cursor: pointer;
+    background-color: #0c2d48;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 0.3rem;
 }
 
 /* updated post card */

@@ -138,6 +138,7 @@ function UpdateCard({ dataToUse, cancelUpdate, updatePost, changeEditMode }) {
         e.preventDefault();
         updatePost(dataToUse.id, updateValue);
         changeEditMode();
+        // alert("Post have been updated");
     }
     function handleChange(e) {
         const { name, value } = e.target;

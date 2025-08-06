@@ -101,13 +101,36 @@ function App() {
         }
     }
 
-    function updatePost(id, updateValues) {
-        console.log(id, updateValues);
+    async function updatePost(id, updateValues) {
+        const { error } = await supabase
+            .from("posts")
+            .update({
+                title: updateValues.title,
+                content: updateValues.content,
+                image_url: updateValues.image_url,
+            })
+            .eq("id", id);
+
+        if (error) {
+            console.error("Update error:", error);
+            return;
+        }
+
+        // Update local state
         setDataArray((prev) =>
             prev.map((item) =>
-                item.id === id ? { ...item, ...updateValues } : item
+                item.id === id
+                    ? {
+                          ...item,
+                          title: updateValues.title,
+                          content: updateValues.content,
+                          image_url: updateValues.image_url,
+                      }
+                    : item
             )
         );
+
+        alert("Post been updated");
     }
 
     return (
